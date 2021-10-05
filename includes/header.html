@@ -1,0 +1,52 @@
+<html>
+<head>
+	<title><?php echo $page_title; ?></title>
+	<link rel="stylesheet" href="includes/style.css" type="text/css" media="screen"/>
+	<link href="http://fonts.cdnfonts.com/css/kingdom-hearts" rel="stylesheet"> 
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+<body id="bg">
+	<div id="topnav">
+		
+		<?php
+
+		// Countdown until competition
+		$remain = strtotime('2021-06-04 00:00:00') - time();
+        $day = floor($remain / 86400);
+        $hours = floor(($remain % 86400) / 3600);
+        $min = floor(($remain % 3600) / 60);
+
+		// Create a login/logout link:
+		session_start();
+
+		if (isset($_SESSION['admin_id'])) {
+			echo '
+			<img src="includes/khcrown.jpg" style="width: 50px; height: 50px;"/>
+			<a href="index.php">Home Page</a>
+			<a href="profile.php">Registered Participants</a>
+			<a href="logout.php">Logout</a>
+			<div class="time">Remaining days: '.$day.' Days '. $hours.' Hrs '.$min.' Mins </div>';
+
+		} elseif (!empty($_SESSION['user_id'])) {
+			echo '
+			<img src="'.$_SESSION['profile_pic'].'" style="width: 50px; height: 50px;">
+			<a href="index.php">Home Page</a>
+			<a href="profile.php">User Profile</a>
+			<a href="logout.php">Logout</a>
+			<div class="time">Remaining days: '.$day.' Days '. $hours.' Hrs '.$min.' Mins </div>';
+
+		} else {
+			echo '
+			<a href="index.php">Home Page</a>
+			<a href="register.php">Register</a>
+			<a href="login.php">Login</a>
+			<div class="time">Remaining days: '.$day.' Days '. $hours.' Hrs '.$min.' Mins </div>';
+		}
+		?>
+	</div> <!--Close div "topnav"-->
+	
+	<div id="header">
+		<h1 class="index">Disney | Square Enix<span class="title">Kingdom Hearts III</span></h1>
+	</div> <!--Close div "header"-->
+	
+	<div id="content">
